@@ -24,8 +24,6 @@ public:
 
 private:
 	Ui::LoginWindow* ui;
-	QHostAddress address;
-	quint16 port;
 	//MESSAGE msgcode;		//´íÎóÂë
 
 

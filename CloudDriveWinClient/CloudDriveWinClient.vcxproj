@@ -67,7 +67,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>E:\code\computer network\CloudDriveWinClient\CloudDriveWinClient\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\code\computer network\CloudDriveWinClient\CloudDriveWinClient\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -96,6 +96,8 @@
     <ClCompile Include="printMessage.cpp" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SignupDialog.cpp" />
+    <ClCompile Include="src\UniformHeader.cpp" />
     <ClCompile Include="Utility\Config.cpp" />
     <ClCompile Include="Utility\LogMessage.cpp" />
     <ClCompile Include="socketconnect.cpp" />
@@ -106,6 +108,7 @@
   <ItemGroup>
     <QtUic Include="CloudDriveWinClient.ui" />
     <QtUic Include="LoginWindow.ui" />
+    <QtUic Include="SignupDialog.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="CloudDriveWinClient.qrc" />
@@ -152,6 +155,7 @@
     <ClInclude Include="include\root_dir.h" />
     <ClInclude Include="include\Uploader.h" />
     <ClInclude Include="printMessage.h" />
+    <QtMoc Include="SignupDialog.h" />
     <QtMoc Include="socketconnect.h" />
   </ItemGroup>
   <ItemGroup>

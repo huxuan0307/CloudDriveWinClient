@@ -44,7 +44,7 @@ enum PackageType
 };
 
 // 对于不同指令交互的大小的映射表 const类型 不可以更改 只能初始化赋值
-const static std::map<PackageType, uint64_t> PackageSizeMap{
+const static std::map<PackageType, uint64_t> pMap{
     {PackageType::SIGNIN, sizeof (SigninBody)},
     {PackageType::SIGNIN_RES, sizeof (SigninresBody)},
 

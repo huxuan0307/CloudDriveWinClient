@@ -46,6 +46,12 @@
     <ClCompile Include="socketconnect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SignupDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UniformHeader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="CloudDriveWinClient.h">
@@ -57,12 +63,18 @@
     <QtMoc Include="socketconnect.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="SignupDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="CloudDriveWinClient.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="LoginWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="SignupDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

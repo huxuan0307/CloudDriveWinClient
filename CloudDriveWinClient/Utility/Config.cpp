@@ -26,12 +26,14 @@ Config::Config(const string &configFile)
         // read line from config file
         getline(fin, strTemp);
 
+
+        // remove all the space of the line
+        strTemp.erase (remove (strTemp.begin (), strTemp.end (), ' '), strTemp.end ());
+        strTemp.erase (remove (strTemp.begin (), strTemp.end (), '\r'), strTemp.end ());
+        strTemp.erase(remove(strTemp.begin(), strTemp.end(), '\n'), strTemp.end());
         // ignore blank line
         if (strTemp == "")
             continue;
-
-        // remove all the space of the line
-        strTemp.erase(remove(strTemp.begin(), strTemp.end(), ' '), strTemp.end());
 
         if (strTemp.front() == '[' && strTemp.back() == ']')
         {

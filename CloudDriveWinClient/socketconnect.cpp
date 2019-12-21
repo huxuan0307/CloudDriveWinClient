@@ -1,22 +1,22 @@
 #include "socketConnect.h"
 
-socketConnect::socketConnect (QObject* parent) : QObject (parent)
+SocketConnect::SocketConnect (QObject* parent) : QObject (parent)
 {
 	socket = nullptr;
 }
 
-socketConnect::socketConnect (const QString& ip, const uint32_t& port, QObject* parent) : QObject (parent)
+SocketConnect::SocketConnect (const QString& ip, const uint32_t& port, QObject* parent) : QObject (parent)
 {
 	Connect (ip, port);
 }
 
-socketConnect::~socketConnect ()
+SocketConnect::~SocketConnect ()
 {
 	if (socket)
 		socket->close ();
 }
 
-bool socketConnect::Connect (const QString& ip, const uint32_t& port)
+bool SocketConnect::Connect (const QString& ip, const uint32_t& port)
 {
 	socket = new QTcpSocket (this);
 	socket->connectToHost (ip, port);
@@ -33,12 +33,12 @@ bool socketConnect::Connect (const QString& ip, const uint32_t& port)
 	}
 }
 
-uint32_t socketConnect::Write (const void* content, const uint32_t& len)
+qint64 SocketConnect::Write (const void* content, const uint32_t& len)
 {
 	return socket->write ((char*)content, len);
 }
 
-uint32_t socketConnect::Read (void* content, const uint32_t& len)
+qint64 SocketConnect::Read (void* content, const uint32_t& len)
 {
 
 	if (socket->waitForReadyRead (3000))

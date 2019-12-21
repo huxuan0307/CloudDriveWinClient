@@ -5,7 +5,7 @@
 #include "Log.h"
 
 #include <string>
-#include <dirent.h>
+//#include <dirent.h>
 #include <fstream>
 #include <sys/stat.h>
 #include <memory>

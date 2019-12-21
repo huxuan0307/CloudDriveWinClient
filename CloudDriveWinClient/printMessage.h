@@ -13,6 +13,7 @@ enum MESSAGE
 	WRONGUSERNAME,		//注册用户名不合规范
 	NOPASSWORD,			//没输入密码
 	WRONGPASSWORD,		//注册密码不合规范
+	SIGNUPSUCCESSFUL,	//注册成功
 	LOGINFAIL,			//登录失败
 	LOGINSUCCESSFUL,	//登录成功
 	NETWORKERR,			//tcp连接无法建立

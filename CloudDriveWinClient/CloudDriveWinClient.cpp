@@ -8,7 +8,7 @@ CloudDriveWinClient::CloudDriveWinClient (const string& config_file, QWidget* pa
 	ui.setupUi (this);
 	this->readConfig (config_file);
 
-	connect (ui.toolButtonLogin, &QToolButton::clicked, this, &CloudDriveWinClient::on_loginBtn_clicked);
+	connect (ui.toolButtonLogin, &QToolButton::clicked, this, &CloudDriveWinClient::on_signinBtn_clicked);
 	connect (ui.toolButtonReg, &QToolButton::clicked, this, &CloudDriveWinClient::on_signupBtn_clicked);
 
 }
@@ -31,21 +31,53 @@ void CloudDriveWinClient::readConfig (const string& config_file)
 
 }
 
+bool CloudDriveWinClient::checkSigninReps ()
+{
+	if (this->signinresPacket.code == SIGNIN_SUCCESS) {
+		//QMessageBox::information(nullptr, QString::fromLocal8Bit ("登录"),
+		//	QString::fromLocal8Bit ("登录成功"), QMessageBox::Ok);
+		printMessage (LOGINSUCCESSFUL);
+		qInfo () << "sign in successfully!!" << endl;
+		memcpy (session, signinresPacket.Session, SessionLength);
+		return true;
+	}
+	else if (this->signinresPacket.code == SIGNIN_INCORRECT_PASSWORD) {
+
+		QMessageBox::information (nullptr, QString::fromLocal8Bit ("登录"),
+			QString::fromLocal8Bit ("登录失败，密码错误"), QMessageBox::Ok);
+		qWarning () << "sign in failed, password error!!" << endl;
+		return false;
+	}
+	else if (this->signinresPacket.code == SIGNIN_UNEXIST_USERNAME) {
+		QMessageBox::information (nullptr, QString::fromLocal8Bit ("登录"),
+			QString::fromLocal8Bit ("登录失败，用户不存在"), QMessageBox::Ok);
+		qWarning () << "sign in failed, user do not exist!!" << endl;
+		return false;
+	}
+	qWarning () << "sign in failed, code do not handled!!" << endl;
+	return false;
+}
+
+bool CloudDriveWinClient::checkSignupReps ()
+{
+	if (this->signupresPacket.code == SIGNUP_SUCCESS) {
+		QMessageBox::information (nullptr, QString::fromLocal8Bit ("注册"),
+			QString::fromLocal8Bit ("注册成功"), QMessageBox::Ok);
+		qInfo () << "sign up successfully!!" << endl;
+		memcpy (session, signupresPacket.Session, SessionLength);
+		return true;
+	}
+	qWarning () << "sign in failed, code do not handled!!" << endl;
+	return false;
+}
+
+
 void CloudDriveWinClient::ReadError (QAbstractSocket::SocketError)
 {
 
 }
 
-void CloudDriveWinClient::on_btnConnect_clicked ()
-{ }
-
-void CloudDriveWinClient::on_btnSend_clicked ()
-{ }
-
-void CloudDriveWinClient::on_pushButton_clicked ()
-{ }
-
-void CloudDriveWinClient::on_loginBtn_clicked ()
+void CloudDriveWinClient::on_signinBtn_clicked ()
 {
 	LoginWindow loginwin;
 	loginwin.exec ();
@@ -59,8 +91,7 @@ void CloudDriveWinClient::on_loginBtn_clicked ()
 	//	QString::fromLocal8Bit ("用户名") + username
 	//	+ QString::fromLocal8Bit ("\n密码") + password, QMessageBox::Ok);
 	if (this->tcp.Connect (this->ip, this->port)) {
-		QMessageBox::information (nullptr, QString::fromLocal8Bit ("登录"),
-			QString::fromLocal8Bit ("服务器连接成功"), QMessageBox::Ok);
+
 	}
 	else {
 		QMessageBox::information (nullptr, QString::fromLocal8Bit ("登录"),
@@ -79,24 +110,31 @@ void CloudDriveWinClient::on_loginBtn_clicked ()
 	len = tcp.Write (&headPacket, sizeof (headPacket));
 	if (len != sizeof (headPacket)) {
 		qCritical () << QString ("write headPacket len=") + len << endl;
+		return;
 	}
 	len = tcp.Write (&signinPacket, headPacket.len);
 	if (len != headPacket.len) {
 		qCritical () << QString ("write signupPacket len=") + len << endl;
+		return;
 	}
 	// 等待收取signinresBody
 	len = tcp.Read (&headPacket, sizeof (headPacket));
 	if (len != sizeof (headPacket)) {
 		qCritical () << QString ("read headPacket len=") + len << endl;
+		return;
 	}
 	if (headPacket.p != pType::SIGNIN_RES) {
 		qCritical () << "read headPacket p != SIGNIN_RES" << endl;
+		return;
 	}
 	len = tcp.Read (&signinresPacket, headPacket.len);
 	if (len != headPacket.len) {
-		qCritical () << QString ("read signinresPacket len=") + len << endl;
+		qCritical () << QString ("read signinresPacket len=") << len << endl;
+		return;
 	}
-
+	if (checkSigninReps ()) {
+		qInfo () << QString ("login susseccful!!!");
+	}
 
 }
 
@@ -110,12 +148,9 @@ void CloudDriveWinClient::on_signupBtn_clicked ()
 		return;
 	}
 	qDebug () << QString::fromLocal8Bit ("获取到的用户名：") + username + "，密码：" << password << endl;
-	//QMessageBox::information (nullptr, QString::fromLocal8Bit ("用户名密码"),
-	//	QString::fromLocal8Bit ("用户名") + username
-	//	+ QString::fromLocal8Bit ("\n密码") + password, QMessageBox::Ok);
+
 	if (this->tcp.Connect (this->ip, this->port)) {
-		QMessageBox::information (nullptr, QString::fromLocal8Bit ("注册"),
-			QString::fromLocal8Bit ("服务器连接成功"), QMessageBox::Ok);
+
 	}
 	else {
 		QMessageBox::information (nullptr, QString::fromLocal8Bit ("注册"),
@@ -136,6 +171,7 @@ void CloudDriveWinClient::on_signupBtn_clicked ()
 	if (len != sizeof (headPacket)) {
 		qCritical () << "write headPacket len=" << len << endl;
 	}
+	sizeof (signupPacket);
 	len = tcp.Write (&signupPacket, headPacket.len);
 	if (len != headPacket.len) {
 		qCritical () << "write signupPacket len=" << len << endl;
@@ -145,10 +181,13 @@ void CloudDriveWinClient::on_signupBtn_clicked ()
 	if (len != sizeof (headPacket)) {
 		qCritical () << "read headPacket len=" << len << endl;
 	}
+	sizeof (signupresPacket);
 	len = tcp.Read (&signupresPacket, headPacket.len);
 	if (len != headPacket.len) {
 		qCritical () << "read headPacket len=" << len << endl;
 	}
-
+	if (checkSignupReps ()) {
+		qInfo () << "sign up successful" << endl;
+	}
 }
 

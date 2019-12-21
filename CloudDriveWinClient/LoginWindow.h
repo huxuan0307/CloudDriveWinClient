@@ -37,6 +37,6 @@ private slots:
 
 	/*void login ();*/
 	void on_cancelBtn_clicked ();
-	void on_loginBtn_clicked ();
+	void on_signinBtn_clicked ();
 
 };

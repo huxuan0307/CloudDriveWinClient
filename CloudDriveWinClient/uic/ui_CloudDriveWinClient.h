@@ -18,6 +18,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
@@ -31,6 +32,9 @@ public:
     QToolButton *toolButtonLogin;
     QLabel *labelWelcome;
     QToolButton *toolButtonReg;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QWidget *tab_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -52,6 +56,15 @@ public:
         toolButtonReg = new QToolButton(centralWidget);
         toolButtonReg->setObjectName(QStringLiteral("toolButtonReg"));
         toolButtonReg->setGeometry(QRect(890, 50, 51, 21));
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setGeometry(QRect(70, 80, 711, 411));
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        tabWidget->addTab(tab_2, QString());
         CloudDriveWinClientClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CloudDriveWinClientClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -66,6 +79,9 @@ public:
 
         retranslateUi(CloudDriveWinClientClass);
 
+        tabWidget->setCurrentIndex(0);
+
+
         QMetaObject::connectSlotsByName(CloudDriveWinClientClass);
     } // setupUi
 
@@ -75,6 +91,8 @@ public:
         toolButtonLogin->setText(QApplication::translate("CloudDriveWinClientClass", "\347\231\273\345\275\225", Q_NULLPTR));
         labelWelcome->setText(QApplication::translate("CloudDriveWinClientClass", "\350\257\267\345\205\210\347\231\273\345\275\225", Q_NULLPTR));
         toolButtonReg->setText(QApplication::translate("CloudDriveWinClientClass", "\346\263\250\345\206\214", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("CloudDriveWinClientClass", "Tab 1", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("CloudDriveWinClientClass", "Tab 2", Q_NULLPTR));
     } // retranslateUi
 
 };

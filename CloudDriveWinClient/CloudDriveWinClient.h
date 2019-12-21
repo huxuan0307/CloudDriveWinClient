@@ -49,17 +49,16 @@ private:
 	UploadPushBody uploadpushPacket;
 	UploadDoneBody uploadDonePacket;
 	FileInfoBody fileInfoPacket;
+	char session[SessionLength];
 
+	bool checkSignupReps ();
+	bool checkSigninReps ();
 	//unique_ptr<Ui::LoginWindow> loginWindow;
 	//unique_ptr<QDialog> regWindow;
 private slots:
 	void ReadData ();
 	void ReadError (QAbstractSocket::SocketError);
-
-	void on_btnConnect_clicked ();
-	void on_btnSend_clicked ();
-	void on_pushButton_clicked ();
-	void on_loginBtn_clicked ();
+	void on_signinBtn_clicked ();
 	void on_signupBtn_clicked ();
 	void openRegWindow ();
 

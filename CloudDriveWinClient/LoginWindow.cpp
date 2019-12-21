@@ -6,7 +6,7 @@ LoginWindow::LoginWindow (QWidget* parent)
 {
 	ui = new Ui::LoginWindow ();
 	ui->setupUi (this);
-	connect (this->ui->toolButtonLogin, &QToolButton::clicked, this, &LoginWindow::on_loginBtn_clicked);
+	connect (this->ui->toolButtonLogin, &QToolButton::clicked, this, &LoginWindow::on_signinBtn_clicked);
 	connect (this->ui->toolButtonCancel, &QToolButton::clicked, this, &LoginWindow::on_cancelBtn_clicked);
 
 }
@@ -31,7 +31,7 @@ bool LoginWindow::preLoginCheck ()
 	return true;
 }
 
-void LoginWindow::on_loginBtn_clicked ()
+void LoginWindow::on_signinBtn_clicked ()
 {
 	if (this->preLoginCheck ()) {
 		this->accept ();

@@ -72,14 +72,27 @@
      <attribute name="title">
       <string>网盘文件列表</string>
      </attribute>
-     <widget class="QListView" name="listView">
+     <widget class="QTableView" name="tableView">
       <property name="geometry">
        <rect>
-        <x>35</x>
-        <y>21</y>
-        <width>751</width>
-        <height>391</height>
+        <x>25</x>
+        <y>71</y>
+        <width>771</width>
+        <height>351</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButtonDelete">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>30</y>
+        <width>47</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>删除</string>
       </property>
      </widget>
     </widget>
@@ -88,6 +101,19 @@
       <string>上传列表</string>
      </attribute>
     </widget>
+   </widget>
+   <widget class="QToolButton" name="toolButtonLogout">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>50</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>登出</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

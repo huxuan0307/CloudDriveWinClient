@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="checkBoxHeader.cpp" />
     <ClCompile Include="CloudDriveWinClient.cpp" />
     <ClCompile Include="printMessage.cpp" />
     <ClCompile Include="LoginWindow.cpp" />
@@ -117,6 +118,7 @@
     <QtMoc Include="LoginWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="checkBoxHeader.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\Database.h" />

@@ -52,6 +52,9 @@
     <ClCompile Include="src\UniformHeader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="checkBoxHeader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="CloudDriveWinClient.h">
@@ -196,6 +199,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Package\UploadRespBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="checkBoxHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,11 +21,5 @@ enum MESSAGE
 	NETWORKERR,			//tcp连接无法建立
 };
 
-//const map<ERRNO, QString>ErrStr{
-//	{ERRNO::NOUSERNAME,"用户名不能为空"},
-//
-//};
-
-
 
 void printMessage (MESSAGE megCode);

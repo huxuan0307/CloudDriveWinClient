@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
@@ -33,8 +34,9 @@ public:
     QLabel *labelWelcome;
     QToolButton *toolButtonReg;
     QTabWidget *tabWidget;
-    QWidget *tab;
-    QWidget *tab_2;
+    QWidget *tabFileList;
+    QListView *listView;
+    QWidget *tabUpload;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -58,13 +60,16 @@ public:
         toolButtonReg->setGeometry(QRect(890, 50, 51, 21));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(70, 80, 711, 411));
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        tabWidget->addTab(tab, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName(QStringLiteral("tab_2"));
-        tabWidget->addTab(tab_2, QString());
+        tabWidget->setGeometry(QRect(70, 80, 831, 461));
+        tabFileList = new QWidget();
+        tabFileList->setObjectName(QStringLiteral("tabFileList"));
+        listView = new QListView(tabFileList);
+        listView->setObjectName(QStringLiteral("listView"));
+        listView->setGeometry(QRect(35, 21, 751, 391));
+        tabWidget->addTab(tabFileList, QString());
+        tabUpload = new QWidget();
+        tabUpload->setObjectName(QStringLiteral("tabUpload"));
+        tabWidget->addTab(tabUpload, QString());
         CloudDriveWinClientClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(CloudDriveWinClientClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -91,8 +96,8 @@ public:
         toolButtonLogin->setText(QApplication::translate("CloudDriveWinClientClass", "\347\231\273\345\275\225", Q_NULLPTR));
         labelWelcome->setText(QApplication::translate("CloudDriveWinClientClass", "\350\257\267\345\205\210\347\231\273\345\275\225", Q_NULLPTR));
         toolButtonReg->setText(QApplication::translate("CloudDriveWinClientClass", "\346\263\250\345\206\214", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("CloudDriveWinClientClass", "Tab 1", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("CloudDriveWinClientClass", "Tab 2", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tabFileList), QApplication::translate("CloudDriveWinClientClass", "\347\275\221\347\233\230\346\226\207\344\273\266\345\210\227\350\241\250", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tabUpload), QApplication::translate("CloudDriveWinClientClass", "\344\270\212\344\274\240\345\210\227\350\241\250", Q_NULLPTR));
     } // retranslateUi
 
 };

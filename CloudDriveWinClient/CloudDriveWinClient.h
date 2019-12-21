@@ -55,8 +55,6 @@ private:
 	bool checkSigninReps ();
 
 private slots:
-	void ReadData ();
-	void ReadError (QAbstractSocket::SocketError);
 	void on_signinBtn_clicked ();
 	void on_signupBtn_clicked ();
 	void openRegWindow ();

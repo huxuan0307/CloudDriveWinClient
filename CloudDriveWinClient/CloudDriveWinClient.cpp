@@ -7,20 +7,13 @@ CloudDriveWinClient::CloudDriveWinClient (const string& config_file, QWidget* pa
 {
 	ui.setupUi (this);
 	this->readConfig (config_file);
-
 	connect (ui.toolButtonLogin, &QToolButton::clicked, this, &CloudDriveWinClient::on_signinBtn_clicked);
 	connect (ui.toolButtonReg, &QToolButton::clicked, this, &CloudDriveWinClient::on_signupBtn_clicked);
-
 }
 
 void CloudDriveWinClient::openRegWindow ()
 {
 	//this->loginWindow.reset (new Ui::LoginWindow ());
-}
-
-void CloudDriveWinClient::ReadData ()
-{
-
 }
 
 void CloudDriveWinClient::readConfig (const string& config_file)
@@ -64,17 +57,16 @@ bool CloudDriveWinClient::checkSignupReps ()
 		QMessageBox::information (nullptr, QString::fromLocal8Bit ("注册"),
 			QString::fromLocal8Bit ("注册成功"), QMessageBox::Ok);
 		qInfo () << "sign up successfully!!" << endl;
-		memcpy (session, signupresPacket.Session, SessionLength);
 		return true;
 	}
-	qWarning () << "sign in failed, code do not handled!!" << endl;
+	else if (this->signupresPacket.code == SIGNUP_EXISTED_USERNAME) {
+		QMessageBox::information (nullptr, QString::fromLocal8Bit ("注册"),
+			QString::fromLocal8Bit ("注册失败，用户名已存在"), QMessageBox::Ok);
+		qInfo () << "sign up failed!!" << endl;
+		return false;
+	}
+	qWarning () << "sign up failed, code do not handled!!" << endl;
 	return false;
-}
-
-
-void CloudDriveWinClient::ReadError (QAbstractSocket::SocketError)
-{
-
 }
 
 void CloudDriveWinClient::on_signinBtn_clicked ()
@@ -147,7 +139,7 @@ void CloudDriveWinClient::on_signupBtn_clicked ()
 	if (username.isEmpty ()) {
 		return;
 	}
-	qDebug () << QString::fromLocal8Bit ("获取到的用户名：") + username + "，密码：" << password << endl;
+	qDebug () << QString::fromLocal8Bit ("username: ") + username + ", password:" << password << endl;
 
 	if (this->tcp.Connect (this->ip, this->port)) {
 
@@ -189,5 +181,6 @@ void CloudDriveWinClient::on_signupBtn_clicked ()
 	if (checkSignupReps ()) {
 		qInfo () << "sign up successful" << endl;
 	}
+
 }
 

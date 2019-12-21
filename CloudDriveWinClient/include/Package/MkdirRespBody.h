@@ -1,16 +1,17 @@
 #pragma once
 #include "Package.h"
 
-enum SYNRespCodes
+
+
+enum MkdirRespCodes
 {
-    SYN_SUCCESS,
-    SYN_UNEXIST_DIR,
+    MKDIR_SUCCESS,
+    MKDIR_ALREADY_HAS
 };
 
-struct SYNRespBody
+struct MkdirRespBody
 {
-    SYNRespCodes code;
-    uint16_t childNum;
     char Session[SessionLength];
+    MkdirRespCodes code;
     char ExternInformation[ExternInformationLength];
 };

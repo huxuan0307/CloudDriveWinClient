@@ -16,11 +16,12 @@ public:
     };
 
 public:
+    Log(){};
     Log(const char *path);
     Log(const string& path);
 	void init (const string& path);
     ~Log();
     // void init(const char *path);
-    void writeLog(Log::LoggingLevel level, std::string Content);
+    void writeLog(const Log::LoggingLevel &level, const std::string &Content);
 
 };

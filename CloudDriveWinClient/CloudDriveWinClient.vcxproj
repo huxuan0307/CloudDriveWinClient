@@ -97,8 +97,8 @@
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Utility\Config.cpp" />
-    <ClCompile Include="Utility\Log.cpp" />
     <ClCompile Include="Utility\LogMessage.cpp" />
+    <ClCompile Include="socketconnect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="CloudDriveWinClient.h" />
@@ -116,21 +116,46 @@
   <ItemGroup>
     <ClInclude Include="common.h" />
     <ClInclude Include="include\Config.h" />
-    <ClInclude Include="include\CopyBody.h" />
-    <ClInclude Include="include\CopyRespBody.h" />
-    <ClInclude Include="include\DeleteBody.h" />
-    <ClInclude Include="include\DeleteRespBody.h" />
+    <ClInclude Include="include\Database.h" />
+    <ClInclude Include="include\Downloader.h" />
+    <ClInclude Include="include\FileOperations.h" />
     <ClInclude Include="include\Log.h" />
     <ClInclude Include="include\LogMessage.h" />
-    <ClInclude Include="include\MoveBody.h" />
-    <ClInclude Include="include\MoveRespBody.h" />
-    <ClInclude Include="include\Package.h" />
-    <ClInclude Include="include\SYNPushBody.h" />
-    <ClInclude Include="include\SYNReqBody.h" />
-    <ClInclude Include="include\SYNRespBody.h" />
-    <ClInclude Include="include\UniformHeader.h" />
-    <ClInclude Include="PackageSize.h" />
+    <ClInclude Include="include\Package\CopyBody.h" />
+    <ClInclude Include="include\Package\CopyRespBody.h" />
+    <ClInclude Include="include\Package\DeleteBody.h" />
+    <ClInclude Include="include\Package\DeleteRespBody.h" />
+    <ClInclude Include="include\Package\DownloadDoneBody.h" />
+    <ClInclude Include="include\Package\DownloadFetchBody.h" />
+    <ClInclude Include="include\Package\DownloadPushBody.h" />
+    <ClInclude Include="include\Package\DownloadReqBody.h" />
+    <ClInclude Include="include\Package\DownloadRespBody.h" />
+    <ClInclude Include="include\Package\FileInfoBody.h" />
+    <ClInclude Include="include\Package\MkdirBody.h" />
+    <ClInclude Include="include\Package\MkdirRespBody.h" />
+    <ClInclude Include="include\Package\MoveBody.h" />
+    <ClInclude Include="include\Package\MoveRespBody.h" />
+    <ClInclude Include="include\Package\Package.h" />
+    <ClInclude Include="include\Package\SigninBody.h" />
+    <ClInclude Include="include\Package\SigninresBody.h" />
+    <ClInclude Include="include\Package\SignupBody.h" />
+    <ClInclude Include="include\Package\SignupresBody.h" />
+    <ClInclude Include="include\Package\SYNPushBody.h" />
+    <ClInclude Include="include\Package\SYNReqBody.h" />
+    <ClInclude Include="include\Package\SYNRespBody.h" />
+    <ClInclude Include="include\Package\UniformHeader.h" />
+    <ClInclude Include="include\Package\UploadDone.h" />
+    <ClInclude Include="include\Package\UploadFetchBody.h" />
+    <ClInclude Include="include\Package\UploadPushBody.h" />
+    <ClInclude Include="include\Package\UploadReqBody.h" />
+    <ClInclude Include="include\Package\UploadRespBody.h" />
+    <ClInclude Include="include\root_dir.h" />
+    <ClInclude Include="include\Uploader.h" />
     <ClInclude Include="printMessage.h" />
+    <QtMoc Include="socketconnect.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\root_dir.h.in" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

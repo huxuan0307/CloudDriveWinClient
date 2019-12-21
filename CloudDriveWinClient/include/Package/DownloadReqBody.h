@@ -1,7 +1,7 @@
 #pragma once
 #include "Package.h"
 
-struct DeleteBody
+struct DownloadReqBody
 {
     char fileName[fileNameLength];
     char path[pathLength];

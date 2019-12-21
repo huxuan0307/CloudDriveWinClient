@@ -1,5 +1,5 @@
 #pragma once
-#include "PackageSize.h" 
+#include "Package.h" 
 
 enum MoveRespCodes
 {
@@ -10,6 +10,6 @@ enum MoveRespCodes
 
 struct MoveRespBody
 {
-    MoveRespCodes code;
     char Session[SessionLength];
+    MoveRespCodes code;
 };

@@ -3,39 +3,42 @@
 #include <QWidget>
 #include <QTcpSocket>
 #include <QHostAddress>
+#include <QToolButton>
+#include <QDialog>
 #include <string>
-#include "package.h"
+#include "uic/ui_LoginWindow.h"
+#include "include/Package/Package.h"
 #include "printMessage.h"
 
 namespace Ui { class LoginWindow; };
 using std::string;
-class LoginWindow : public QWidget
+class LoginWindow : public QDialog
 {
 	Q_OBJECT
 
 public:
 	LoginWindow (QWidget* parent = Q_NULLPTR);
 	~LoginWindow ();
+	QString username;
+	QString password;
 
 private:
 	Ui::LoginWindow* ui;
-	QTcpSocket* tcp;
 	QHostAddress address;
 	quint16 port;
-	MESSAGE msgcode;		//´íÎóÂë
+	//MESSAGE msgcode;		//´íÎóÂë
 
-	UniformHeader head;
-	SigninBody req;
-	string username;
-	string password;
+
 	//IPv4Protocol;
 	bool preLoginCheck ();
-	void loginRes ();
-	void loginSucc ();
-	void loginFailed (SigninCodes);
 
+	//void loginRes ();
+	//void loginSucc ();
+	//void loginFailed (SigninCodes);
 private slots:
 
-	void login ();
+	/*void login ();*/
+	void on_cancelBtn_clicked ();
+	void on_loginBtn_clicked ();
 
 };

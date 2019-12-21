@@ -1,11 +1,11 @@
 #pragma once
-#include "PackageSize.h" 
+#include "Package.h" 
 
-struct MoveBody
+struct CopyBody
 {
+    char Session[SessionLength];
     char fileName[fileNameLength];
     char path[pathLength];
     char fileNameTo[fileNameLength];
     char pathTo[pathLength];
-    char Session[SessionLength];
 };

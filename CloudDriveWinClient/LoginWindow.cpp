@@ -1,17 +1,13 @@
 #include "LoginWindow.h"
-#include "ui_LoginWindow.h"
 
 LoginWindow::LoginWindow (QWidget* parent)
-	: QWidget (parent), head (PackageType::SIGNIN)
+	:QDialog (parent),
+	ui (new Ui::LoginWindow)
 {
-
 	ui = new Ui::LoginWindow ();
 	ui->setupUi (this);
-	this->port = 0;
-
-	tcp->abort ();
-
-
+	connect (this->ui->toolButtonLogin, &QToolButton::clicked, this, &LoginWindow::on_loginBtn_clicked);
+	connect (this->ui->toolButtonCancel, &QToolButton::clicked, this, &LoginWindow::on_cancelBtn_clicked);
 
 }
 
@@ -22,85 +18,97 @@ LoginWindow::~LoginWindow ()
 // ¼ì²éÓÃ»§ÃûºÍÃÜÂë
 bool LoginWindow::preLoginCheck ()
 {
-	username = ui->lineEditUserName->text ().toStdString ();
-	if (username.empty ()) {
-		msgcode = MESSAGE::NOUSERNAME;
+	username = ui->lineEditUserName->text ();
+	if (username.isEmpty ()) {
+		printMessage (MESSAGE::NOUSERNAME);
 		return false;
 	}
-	password = ui->lineEditPassword->text ().toStdString ();
-	if (password.empty ()) {
-		msgcode = MESSAGE::NOPASSWORD;
+	password = ui->lineEditPassword->text ();
+	if (password.isEmpty ()) {
+		printMessage (MESSAGE::NOPASSWORD);
 		return false;
 	}
 	return true;
 }
 
-void LoginWindow::login ()
+void LoginWindow::on_loginBtn_clicked ()
 {
-	if (!this->preLoginCheck ()) {
-		printMessage (this->msgcode);
-		return;
-	}
-	tcp->connectToHost (address, port);
-	if (tcp->waitForConnected (1000)) {
-		printMessage (MESSAGE::NETWORKERR);
-		return;
-	}
-
-	strcpy (req.Username, username.data ());
-	strcpy (req.Password, password.data ());
-	tcp->write ((char*)&head, sizeof (head));
-	tcp->write ((char*)&req, sizeof (req));
-	connect (tcp, &QTcpSocket::readyRead, this, &LoginWindow::loginRes);
-
-}
-
-void LoginWindow::loginRes ()
-{
-	QByteArray buffer = tcp->read (sizeof (UniformHeader));
-	if (!buffer.isEmpty ()) {
-		const UniformHeader* headp = (UniformHeader*)buffer.data ();
-		if (headp->p == PackageType::SIGNIN_RES) {
-			buffer = tcp->read (headp->len);
-			if (!buffer.isEmpty ()) {
-				const SigninresBody* signinresp = (SigninresBody*)buffer.data ();
-				if (signinresp->code == SigninCodes::SIGNIN_SUCCESS) {
-					this->loginSucc ();
-				}
-				else {
-					this->loginFailed (signinresp->code);
-				}
-			}
-			else {
-				qCritical () << "loginRes() bufferÎª¿Õ 2";
-			}
-		}
-		else {
-			qCritical () << "ÊÕµ½·ÇSIGNIN_RES°ü";
-		}
-
-	}
-	else {
-		qCritical () << "loginRes() bufferÎª¿Õ 1";
+	if (this->preLoginCheck ()) {
+		this->accept ();
 	}
 }
 
-inline void LoginWindow::loginSucc ()
+void LoginWindow::on_cancelBtn_clicked ()
 {
-	qInfo () << "µÇÂ¼³É¹¦";
-	printMessage (MESSAGE::LOGINSUCCESSFUL);
+	this->close ();
 }
 
-inline void LoginWindow::loginFailed (SigninCodes code)
-{
-	if (code == SigninCodes::SIGNIN_UNEXIST_USERNAME) {
-		qWarning () << "µÇÂ¼Ê§°Ü£¬ÓÃ»§Ãû²»´æÔÚ";
-	}
-	else if (code == SigninCodes::SIGNIN_INCORRECT_PASSWORD) {
-		qWarning () << "µÇÂ¼Ê§°Ü£¬ÃÜÂë´íÎó";
-	}
-	else {
-		qWarning () << "µÇÂ¼Ê§°Ü£¬Î´Öª´íÎó";
-	}
-	printMessage (MESSAGE::LOGINFAIL);
-}
+//void LoginWindow::login ()
+//{
+//	if (!this->preLoginCheck ()) {
+//		printMessage (this->msgcode);
+//		return;
+//	}
+//	tcp->connectToHost (address, port);
+//	if (tcp->waitForConnected (1000)) {
+//		printMessage (MESSAGE::NETWORKERR);
+//		return;
+//	}
+//
+//	strcpy (req.Username, username.data ());
+//	strcpy (req.Password, password.data ());
+//	tcp->write ((char*)&head, sizeof (head));
+//	tcp->write ((char*)&req, sizeof (req));
+//	connect (tcp, &QTcpSocket::readyRead, this, &LoginWindow::loginRes);
+//
+//}
+
+//void LoginWindow::loginRes ()
+//{
+//	QByteArray buffer = tcp->read (sizeof (UniformHeader));
+//	if (!buffer.isEmpty ()) {
+//		const UniformHeader* headp = (UniformHeader*)buffer.data ();
+//		if (headp->p == PackageType::SIGNIN_RES) {
+//			buffer = tcp->read (headp->len);
+//			if (!buffer.isEmpty ()) {
+//				const SigninresBody* signinresp = (SigninresBody*)buffer.data ();
+//				if (signinresp->code == SigninCodes::SIGNIN_SUCCESS) {
+//					this->loginSucc ();
+//				}
+//				else {
+//					this->loginFailed (signinresp->code);
+//				}
+//			}
+//			else {
+//				qCritical () << "loginRes() bufferÎª¿Õ 2";
+//			}
+//		}
+//		else {
+//			qCritical () << "ÊÕµ½·ÇSIGNIN_RES°ü";
+//		}
+//
+//	}
+//	else {
+//		qCritical () << "loginRes() bufferÎª¿Õ 1";
+//	}
+//}
+
+//inline void LoginWindow::loginSucc ()
+//{
+//	qInfo () << "µÇÂ¼³É¹¦";
+//	printMessage (MESSAGE::LOGINSUCCESSFUL);
+//}
+
+//inline void LoginWindow::loginFailed (SigninCodes code)
+//{
+//	if (code == SigninCodes::SIGNIN_UNEXIST_USERNAME) {
+//		qWarning () << "µÇÂ¼Ê§°Ü£¬ÓÃ»§Ãû²»´æÔÚ";
+//	}
+//	else if (code == SigninCodes::SIGNIN_INCORRECT_PASSWORD) {
+//		qWarning () << "µÇÂ¼Ê§°Ü£¬ÃÜÂë´íÎó";
+//	}
+//	else {
+//		qWarning () << "µÇÂ¼Ê§°Ü£¬Î´Öª´íÎó";
+//	}
+//	printMessage (MESSAGE::LOGINFAIL);
+//}

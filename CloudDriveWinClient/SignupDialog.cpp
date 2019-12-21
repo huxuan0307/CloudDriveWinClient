@@ -29,6 +29,18 @@ bool SignupDialog::preSignUpCheck ()
 		printMessage (MESSAGE::NOPASSWORD);
 		return false;
 	}
+	password2 = ui->lineEditPassword_2->text ();
+
+	if (password2.isEmpty ()) {
+		printMessage (MESSAGE::NOPASSWORD2);
+		return false;
+	}
+	if (password != password2) {
+		printMessage (MESSAGE::NOEQUPASSWORD);
+		return false;
+	}
+
+
 	return true;
 }
 

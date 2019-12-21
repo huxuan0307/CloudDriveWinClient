@@ -12,7 +12,9 @@ enum MESSAGE
 	NOUSERNAME,			//没输入用户名
 	WRONGUSERNAME,		//注册用户名不合规范
 	NOPASSWORD,			//没输入密码
+	NOPASSWORD2,		//没输入密码2
 	WRONGPASSWORD,		//注册密码不合规范
+	NOEQUPASSWORD,		//两个密码不相符
 	SIGNUPSUCCESSFUL,	//注册成功
 	LOGINFAIL,			//登录失败
 	LOGINSUCCESSFUL,	//登录成功

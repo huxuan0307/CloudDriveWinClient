@@ -14,7 +14,7 @@ public:
 	~SignupDialog();
 	QString username;
 	QString password;
-
+	QString password2;
 
 
 private:

@@ -53,8 +53,7 @@ private:
 
 	bool checkSignupReps ();
 	bool checkSigninReps ();
-	//unique_ptr<Ui::LoginWindow> loginWindow;
-	//unique_ptr<QDialog> regWindow;
+
 private slots:
 	void ReadData ();
 	void ReadError (QAbstractSocket::SocketError);

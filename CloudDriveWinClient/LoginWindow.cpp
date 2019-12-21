@@ -43,6 +43,7 @@ void LoginWindow::on_cancelBtn_clicked ()
 	this->close ();
 }
 
+
 //void LoginWindow::login ()
 //{
 //	if (!this->preLoginCheck ()) {

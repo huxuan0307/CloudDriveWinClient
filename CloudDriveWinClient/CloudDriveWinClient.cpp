@@ -12,6 +12,7 @@ CloudDriveWinClient::CloudDriveWinClient (const string& config_file, QWidget* pa
 	connect (ui.toolButtonReg, &QToolButton::clicked, this, &CloudDriveWinClient::on_signupBtn_clicked);
 	connect (ui.toolButtonDelete, &QToolButton::clicked, this, &CloudDriveWinClient::on_deleteBtn_clicked);
 	connect (ui.toolButtonLogout, &QToolButton::clicked, this, &CloudDriveWinClient::on_logoutBtn_clicked);
+	connect (ui.toolButtonMKDir, &QToolButton::clicked, this, &CloudDriveWinClient::on_mkdirBtn_clicked);
 
 	//--------------------- 添加文件的样例
 	//this->fileinfov.push_back (FileInfo{ string ("1.txt"),20,string ("2019-10-10 20:58:21"),true });
@@ -270,6 +271,11 @@ void CloudDriveWinClient::on_deleteBtn_clicked ()
 			qDebug () << file.name.data ();
 		}
 	}
+}
+
+void CloudDriveWinClient::on_mkdirBtn_clicked ()
+{
+	//this->SendMkdir()
 }
 
 QSet<int> CloudDriveWinClient::getSelectedRow ()

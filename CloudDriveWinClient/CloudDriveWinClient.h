@@ -85,6 +85,7 @@ private slots:
 	void fillTableView ();
 	void on_refreshBtn_clicked ();
 	void on_deleteBtn_clicked ();
+	void on_mkdirBtn_clicked ();
 	QSet<int> getSelectedRow ();
 	void on_logoutBtn_clicked ();
 	void SendSynReq ();

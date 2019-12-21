@@ -37,6 +37,7 @@ public:
     QWidget *tabFileList;
     QTableView *tableView;
     QToolButton *toolButtonDelete;
+    QToolButton *toolButtonMKDir;
     QWidget *tabUpload;
     QToolButton *toolButtonLogout;
     QMenuBar *menuBar;
@@ -71,6 +72,9 @@ public:
         toolButtonDelete = new QToolButton(tabFileList);
         toolButtonDelete->setObjectName(QStringLiteral("toolButtonDelete"));
         toolButtonDelete->setGeometry(QRect(600, 30, 47, 21));
+        toolButtonMKDir = new QToolButton(tabFileList);
+        toolButtonMKDir->setObjectName(QStringLiteral("toolButtonMKDir"));
+        toolButtonMKDir->setGeometry(QRect(540, 30, 47, 21));
         tabWidget->addTab(tabFileList, QString());
         tabUpload = new QWidget();
         tabUpload->setObjectName(QStringLiteral("tabUpload"));
@@ -105,6 +109,7 @@ public:
         labelWelcome->setText(QApplication::translate("CloudDriveWinClientClass", "\350\257\267\345\205\210\347\231\273\345\275\225", Q_NULLPTR));
         toolButtonReg->setText(QApplication::translate("CloudDriveWinClientClass", "\346\263\250\345\206\214", Q_NULLPTR));
         toolButtonDelete->setText(QApplication::translate("CloudDriveWinClientClass", "\345\210\240\351\231\244", Q_NULLPTR));
+        toolButtonMKDir->setText(QApplication::translate("CloudDriveWinClientClass", "\346\226\260\345\273\272", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabFileList), QApplication::translate("CloudDriveWinClientClass", "\347\275\221\347\233\230\346\226\207\344\273\266\345\210\227\350\241\250", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabUpload), QApplication::translate("CloudDriveWinClientClass", "\344\270\212\344\274\240\345\210\227\350\241\250", Q_NULLPTR));
         toolButtonLogout->setText(QApplication::translate("CloudDriveWinClientClass", "\347\231\273\345\207\272", Q_NULLPTR));
